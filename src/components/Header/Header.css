@@ -1,0 +1,11 @@
+.header-container {
+  background-color: var(--home-button-color);
+  text-align: center;
+  display: flex;
+  height: 10vh;
+  width: 100vw;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}

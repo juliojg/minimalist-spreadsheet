@@ -1,0 +1,13 @@
+:root {
+  --primary-background-color: #acf0ed;
+  --error-background-color: #bc1111;
+  --font-error: #e4ffe1;
+  --home-button-color: #299eb9;
+  --font-home-button: #e4ffe1;
+  --cocktail-card-background-color: #ffe8c2;
+  --font-cocktail-card: darkslategray;
+  --spinner-color: #6a8d73;
+  --mini-spinner-color: #2fd1bb;
+  --disabled: rgb(21, 19, 18);
+}
+

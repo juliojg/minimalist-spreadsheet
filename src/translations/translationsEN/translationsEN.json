@@ -1,0 +1,9 @@
+{
+  "error": {
+    "404": "Error 404, press to go back to homepage."
+  },
+  "titles": {
+    "spreadsheet": "Minimalist spreadsheet",
+    "instructions": "Instructions..."
+  }
+}
