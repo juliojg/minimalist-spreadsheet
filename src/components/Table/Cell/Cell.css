@@ -1,0 +1,18 @@
+.cell-container {
+  width: 7em;
+}
+.cell-container-focused {
+  width: 7em;
+  border: 2px blue dashed;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+.header-cell-container {
+  width: 7em;
+  pointer-events: none;
+  background-color: rgb(212, 207, 207);
+}

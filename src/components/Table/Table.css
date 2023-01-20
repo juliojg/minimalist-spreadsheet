@@ -1,0 +1,11 @@
+.table-container {
+  max-height: 50vh;
+  max-width: 75vw;
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+.content-container {
+  flex-direction: column;
+}
