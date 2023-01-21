@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import { Cell } from "../../components/Table/Cell/Cell";
 import { SpreadSheetContext } from "../../context/SpreadSheetContext";
-import { Sentence } from "../../types/spreadSheetTypes";
+import { useGetCurrentCell } from "../../hooks/useGetCurrentCell";
+import { useGetEvalFn } from "../../hooks/useGetEvalFn";
+import { useGetTable } from "../../hooks/useGetTable";
 
 type CellContainerProps = {
   positionX: number;
@@ -12,7 +14,11 @@ export const CellContainer: React.FC<CellContainerProps> = ({
   positionX,
   positionY
 }) => {
-  const [state, dispatch] = useContext(SpreadSheetContext);
+  const [_, dispatch] = useContext(SpreadSheetContext);
+  const evalFn = useGetEvalFn();
+  const table = useGetTable();
+  const currentCell = useGetCurrentCell();
+
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     dispatch({
@@ -34,39 +40,19 @@ export const CellContainer: React.FC<CellContainerProps> = ({
     });
   };
 
-  const evalSentence = (sentence: Sentence) => {
-    if (typeof sentence === "string") {
-      return sentence;
-    }
-
-    if (sentence.operation === "SUM") {
-      return sentence.refs.reduce(
-        (acc, current) =>
-          acc + Number(state.table[current.valueY][current.valueX]),
-        0
-      );
-    }
-    if (sentence.operation === "SUB") {
-      return sentence.refs.reduce(
-        (acc, current) =>
-          acc - Number(state.table[current.valueY][current.valueX]),
-        0
-      );
-    } else return "toEval";
-  };
-
   return (
     <Cell
       positionX={positionX}
       positionY={positionY}
       onChange={handleOnChange}
       onClick={handleOnClick}
-      currentValue={state.table[positionY][positionX]}
-      evalSentence={evalSentence}
+      currentValue={table[positionY][positionX]}
+      evalSentence={evalFn}
       focused={
-        state.currentCell?.positionX === positionX &&
-        state.currentCell?.positionY === positionY
+        currentCell?.positionX === positionX &&
+        currentCell?.positionY === positionY
       }
     />
   );
 };
+

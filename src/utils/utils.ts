@@ -11,8 +11,7 @@ export const genList = (n: number) => {
 export const parseCell = (cell: string) => {
   const positionX = cell[0];
   const positionY = cell.slice(1, cell.length);
-  const res: CellRef = { valueX: positionX.charCodeAt(0) - 65 + 1, valueY: Number(positionY) };
-  console.log('CELL', res)
+  const res: CellRef = { positionX: positionX.charCodeAt(0) - 65 + 1, positionY: Number(positionY) };
   return res;
 }
 
