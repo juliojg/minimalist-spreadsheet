@@ -6,6 +6,6 @@ type HeaderCellProps = {
 
 export const HeaderCell: React.FC<HeaderCellProps> = ({ index }) => {
   return (
-    <input className="header-cell-container" value={index} readOnly></input>
+    <input className={/^\d+$/.test(index.toString()) || /@/.test(index.toString()) ? "header-left-cell-container" : "header-cell-container"} value={index} readOnly></input>
   );
 };

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Cell } from "../../components/Table/Cell/Cell";
 import { SpreadSheetContext } from "../../context/SpreadSheetContext";
 import { useGetCurrentCell } from "../../hooks/useGetCurrentCell";
-import { useGetEvalFn } from "../../hooks/useGetEvalFn";
+import { useEvalSentence } from "../../hooks/useEvalSentence";
 import { useGetTable } from "../../hooks/useGetTable";
 
 type CellContainerProps = {
@@ -15,10 +15,9 @@ export const CellContainer: React.FC<CellContainerProps> = ({
   positionY
 }) => {
   const [, dispatch] = useContext(SpreadSheetContext);
-  const evalFn = useGetEvalFn();
+  const evaluatedSentence = useEvalSentence(positionY, positionX);
   const table = useGetTable();
   const currentCell = useGetCurrentCell();
-
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     dispatch({
@@ -42,12 +41,10 @@ export const CellContainer: React.FC<CellContainerProps> = ({
 
   return (
     <Cell
-      positionX={positionX}
-      positionY={positionY}
       onChange={handleOnChange}
       onClick={handleOnClick}
-      currentValue={table[positionY][positionX]}
-      evalSentence={evalFn}
+      currentSentence={table[positionY][positionX]}
+      currentValue={evaluatedSentence}
       focused={
         currentCell?.positionX === positionX &&
         currentCell?.positionY === positionY
@@ -55,4 +52,3 @@ export const CellContainer: React.FC<CellContainerProps> = ({
     />
   );
 };
-

@@ -1,10 +1,12 @@
-import { useCallback } from "react";
 import { Sentence } from "../types/spreadSheetTypes";
-import { parseSentence } from "../utils/utils";
+import { parseSentence } from "../utils/parser";
 import { useGetTable } from "./useGetTable";
 
-export const useGetEvalFn = () => {
+export const useEvalSentence = (positionY: string, positionX: string) => {
   const table = useGetTable();
+
+  const inputSentence = table[positionY][positionX];
+  const parsedSentence = parseSentence(inputSentence);
 
   const evalSentence: (sentence: Sentence) => string = (sentence: Sentence) => {
 
@@ -21,10 +23,9 @@ export const useGetEvalFn = () => {
     }
     if (sentence.operator === "SUM") {
       return sentence.operands.reduce(
-        (acc, current) =>{ 
-      console.log(table[current.positionY][current.positionX]);
-          
-          return acc + Number(evalSentence(parseSentence(table[current.positionY][current.positionX])))},
+        (acc, current) => {
+          return acc + Number(evalSentence(parseSentence(table[current.positionY][current.positionX])))
+        },
         0
       ).toString();
     }
@@ -37,5 +38,5 @@ export const useGetEvalFn = () => {
     } else return "toEval";
   }
 
-  return evalSentence;
+  return evalSentence(parsedSentence);
 }
