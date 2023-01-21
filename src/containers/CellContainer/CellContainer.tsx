@@ -6,15 +6,15 @@ import { useGetEvalFn } from "../../hooks/useGetEvalFn";
 import { useGetTable } from "../../hooks/useGetTable";
 
 type CellContainerProps = {
-  positionX: number;
-  positionY: number;
+  positionX: string;
+  positionY: string;
 };
 
 export const CellContainer: React.FC<CellContainerProps> = ({
   positionX,
   positionY
 }) => {
-  const [_, dispatch] = useContext(SpreadSheetContext);
+  const [, dispatch] = useContext(SpreadSheetContext);
   const evalFn = useGetEvalFn();
   const table = useGetTable();
   const currentCell = useGetCurrentCell();

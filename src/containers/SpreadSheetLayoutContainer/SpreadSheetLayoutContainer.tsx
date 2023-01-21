@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { SpreadSheetContext } from "../../context/SpreadSheetContext";
-import { Footer } from "../Footer/Footer";
-import { Header } from "../Header/Header";
-import { SpreadSheetMain } from "../SpreadSheetMain/SpreadSheetMain";
+import { Footer } from "../../components/Footer/Footer";
+import { Header } from "../../components/Header/Header";
+import { SpreadSheetMain } from "../../components/SpreadSheetMain/SpreadSheetMain";
 
-export const SpreadSheetLayout: React.FC<{}> = () => {
+export const SpreadSheetLayoutContainer: React.FC<{}> = () => {
   const [state, dispatch] = useContext(SpreadSheetContext);
 
   useEffect(() => {

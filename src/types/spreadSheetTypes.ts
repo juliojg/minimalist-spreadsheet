@@ -1,7 +1,10 @@
-export type Operation = 'SUM' | 'SUB';
-
 export type Value = string;
 
-export type CellRef = {positionX: number, positionY: number}
+export type CellRef = { positionX: string; positionY: string };
 
-export type Sentence = { operation: Operation, refs: CellRef[]} | Value
+export type Sentence = {
+  operator: string;
+  operands: CellRef[];
+  value: string | null;
+  error: { hasError: boolean; errorMessage: string | null };
+};

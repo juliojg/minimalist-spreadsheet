@@ -1,13 +1,13 @@
 import React from "react";
 import { SpreadSheetContextProvider } from "./context/SpreadSheetContext";
-import { SpreadSheetLayout } from "./components/SpreadSheetLayout/SpreadSheetLayout";
 import "./styles/colors.css";
 import './App.css';
+import { SpreadSheetLayoutContainer } from "./containers/SpreadSheetLayoutContainer/SpreadSheetLayoutContainer";
 
 function App() {
   return (
     <SpreadSheetContextProvider>
-      <SpreadSheetLayout />
+      <SpreadSheetLayoutContainer />
     </SpreadSheetContextProvider>
   );
 }

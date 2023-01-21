@@ -3,8 +3,8 @@ import "./Cell.css";
 
 type CellProps = {
   header?: boolean;
-  positionX: number;
-  positionY: number;
+  positionX: string;
+  positionY: string;
   currentValue: string;
   onChange: (e: React.FormEvent<HTMLInputElement>) => void;
   onClick: React.MouseEventHandler<HTMLInputElement>;
@@ -19,6 +19,10 @@ export const Cell: React.FC<CellProps> = ({
   currentValue,
   evalSentence
 }) => {
+
+  const a = parseSentence(currentValue);
+  const b = evalSentence(a);
+  
   return focused ? (
     <input
       className="cell-container-focused"
@@ -30,7 +34,7 @@ export const Cell: React.FC<CellProps> = ({
     <input
       type="text"
       readOnly
-      value={evalSentence(parseSentence(currentValue))}
+      value={b}
       onChange={onChange}
       className="cell-container"
       onClick={onClick}

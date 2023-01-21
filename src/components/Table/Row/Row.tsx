@@ -2,12 +2,12 @@ import { CellContainer } from "../../../containers/CellContainer/CellContainer";
 import { HeaderCell } from "../Cell/HeaderCell";
 import "./Row.css";
 
-type RowProps = { content: string[]; positionY: number };
+type RowProps = { content: string[]; positionY: string };
 
 export const Row: React.FC<RowProps> = ({ content, positionY }) => {
   return (
     <div className="row-container">
-      {positionY === 0
+      {positionY === '0'
         ? content.map((y, index) => (
             <HeaderCell
               key={index}
@@ -20,7 +20,7 @@ export const Row: React.FC<RowProps> = ({ content, positionY }) => {
             ) : (
               <CellContainer
                 key={index}
-                positionX={index}
+                positionX={index.toString()}
                 positionY={positionY}
               />
             )
