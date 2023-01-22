@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { Cell } from "../../components/Table/Cell/Cell";
 import { SpreadSheetContext } from "../../context/SpreadSheetContext";
 import { useGetCurrentCell } from "../../hooks/useGetCurrentCell";
@@ -14,9 +14,11 @@ export const CellContainer: React.FC<CellContainerProps> = ({
 }) => {
   const [, dispatch] = useContext(SpreadSheetContext);
   const evaluatedCell = useEvalCell(cellId);
-  
+
   const [, byId] = useGetTable();
   const currentCell = useGetCurrentCell();
+
+  const currentSentence = byId[cellId];
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     dispatch({
@@ -28,20 +30,20 @@ export const CellContainer: React.FC<CellContainerProps> = ({
     });
   };
 
-  const handleOnClick: React.MouseEventHandler<HTMLInputElement> = () => {
+  const handleOnClick: React.MouseEventHandler<HTMLInputElement> = useCallback(() => {
     dispatch({
       type: "setCurrentCell",
       payload: {
         cellId: cellId
       }
     });
-  };
+  }, [cellId, dispatch]);
 
   return (
     <Cell
       onChange={handleOnChange}
       onClick={handleOnClick}
-      currentSentence={byId[cellId]}
+      currentSentence={currentSentence}
       currentValue={evaluatedCell}
       focused={currentCell === cellId}
     />

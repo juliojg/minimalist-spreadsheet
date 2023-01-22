@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { genList, zip } from "../utils/utils";
 
 export type SpreadSheetStateType = {
@@ -65,6 +65,13 @@ export const SpreadSheetContextProvider: React.FC<Props> = (props) => {
   }
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    dispatch({
+      type: "initializeTable",
+      payload: { maxRows: state.maxRows, maxColumns: state.maxColumns }
+    });
+  }, [state.maxRows, state.maxColumns]);
 
   return (
     <SpreadSheetContext.Provider value={[state, dispatch]}>

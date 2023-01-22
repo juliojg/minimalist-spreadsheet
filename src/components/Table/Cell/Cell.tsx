@@ -30,7 +30,7 @@ export const Cell: React.FC<CellProps> = ({
       readOnly
       value={currentValue}
       onChange={onChange}
-      className="cell-container"
+      className={currentValue.toString().includes("!ERROR") ? "cell-container-error" : "cell-container"}
       onClick={onClick}
     ></input>
   );

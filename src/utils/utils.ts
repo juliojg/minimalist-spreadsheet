@@ -16,18 +16,19 @@ export function zip<T, U>(arr1: T[], arr2: U[]): Array<[T, U]> {
   return result;
 }
 
-export const evalSentence = (sentence: string, byId: {[cellId: string]: string}) => {
-
-  const evalFn = (expression: string, notAllowedCellsIds: string[] = []
-  ) => {
-    
+export const evalSentence = (
+  sentence: string,
+  byId: { [cellId: string]: string }
+) => {
+  const evalFn = (expression: string, notAllowedCellsIds: string[] = []) => {
     const filterFoundCells = notAllowedCellsIds.filter((cellId) =>
-    expression.includes(cellId)
+      expression.includes(cellId)
     );
-    
+
     if (filterFoundCells.length) {
       return "!ERROR: Depends from own/recursive cell";
     }
+
     const cellValues = [
       ...Array.from(expression?.matchAll(/[A-Z]+[0-9]+/gi) ?? [])
     ]
@@ -42,23 +43,20 @@ export const evalSentence = (sentence: string, byId: {[cellId: string]: string})
             notAllowedCellsIds.push(cellId);
             value = evalFn(value.slice(1), notAllowedCellsIds);
           }
-        } catch { }
-        
+        } catch {}
+
         return {
           cellId,
           value
         };
       });
-      
-      const evaluatedExpression = cellValues.reduce(
-        (finalExpression, cellValue) =>
-        finalExpression.replaceAll(
-          cellValue.cellId,
-          cellValue.value
-          ),
-          expression
-          );
-          
+
+    const evaluatedExpression = cellValues.reduce(
+      (finalExpression, cellValue) =>
+        finalExpression.replaceAll(cellValue.cellId, cellValue.value),
+      expression
+    );
+
     return `(${evaluatedExpression})`;
   };
 

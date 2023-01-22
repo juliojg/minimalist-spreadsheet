@@ -5,7 +5,14 @@
 .cell-container-focused {
   width: 10em;
   height: 2em;
-  border: 2px blue dashed;
+  border: 2px var(--focused-cell-border) dashed;
+}
+
+.cell-container-error {
+  width: 10em;
+  color: var(--font-error);
+  background-color: var(--error-background-color);
+  height: 2em;
 }
 
 textarea:focus,
@@ -17,12 +24,12 @@ input:focus {
   width: 10em;
   text-align: center;
   pointer-events: none;
-  background-color: rgb(139, 193, 194);
+  background-color: var(--header-cell-background);
 }
 
 .header-left-cell-container {
   width: 3em;
   text-align: center;
   pointer-events: none;
-  background-color: rgb(139, 193, 194);
+  background-color: var(--header-cell-background);
 }

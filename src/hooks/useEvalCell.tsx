@@ -9,7 +9,7 @@ export const useEvalCell = (cellId: string) => {
   if (!value) {
     return ''
   }
-
+  
   if (value.startsWith("=")) {
     try {
       const evalutedExpression = evalSentence(value, byId);
@@ -20,6 +20,8 @@ export const useEvalCell = (cellId: string) => {
     } catch {
       return value;
     }
+  } else if (!(/^[0-9]*$/.test(value))){
+    return '!ERROR: Cell must start with = or be a number';
   }
 
   return value;
