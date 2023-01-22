@@ -1,8 +1,5 @@
-import { evaluate } from "mathjs";
-// import { useGetTable } from "./useGetTable";
 
 export const useEvalSentence = () => (sentence: string, byId: {[cellId: string]: string}) => {
-  // const [, byId] = useGetTable();
 
   const evalSentence = (expression: string, notAllowedCellsIds: string[] = []
   ) => {

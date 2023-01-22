@@ -18,6 +18,8 @@ export const CellContainer: React.FC<CellContainerProps> = ({
 }) => {
   const [, dispatch] = useContext(SpreadSheetContext);
   const evaluatedCell = useEvalCell(cellId);
+  console.log('res', evaluatedCell);
+  
   const [, byId] = useGetTable();
   const currentCell = useGetCurrentCell();
 
