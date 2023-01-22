@@ -4,7 +4,7 @@ import { useGetTable } from "./useGetTable";
 
 export const useEvalCell = (cellId: string) => {
   const [, byId] = useGetTable();
-
+  
   const value = byId[cellId];
   if (!value) {
     return ''

@@ -6,19 +6,14 @@ import { useGetTable } from "../../hooks/useGetTable";
 import { useEvalCell } from "../../hooks/useEvalCell";
 
 type CellContainerProps = {
-  positionX: string;
-  positionY: string;
   cellId: string;
 };
 
 export const CellContainer: React.FC<CellContainerProps> = ({
-  positionX,
-  positionY,
   cellId
 }) => {
   const [, dispatch] = useContext(SpreadSheetContext);
   const evaluatedCell = useEvalCell(cellId);
-  console.log('res', evaluatedCell);
   
   const [, byId] = useGetTable();
   const currentCell = useGetCurrentCell();
