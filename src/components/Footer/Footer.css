@@ -17,3 +17,10 @@
   padding-left: 1em;
   font-weight: bolder;
 }
+
+.current-cell-text-error {
+  color: var(--error-background-color);
+  font-size: 2em;
+  padding-left: 1em;
+  font-weight: bolder;
+}

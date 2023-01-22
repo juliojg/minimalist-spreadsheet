@@ -8,7 +8,7 @@
   },
   "footer": {
     "current-cell": "Current cell",
-    "current-cell-sentence": "Sentence"
-
+    "current-cell-sentence": "Sentence",
+    "current-cell-value": "Evaluated sentence"
   }
 }

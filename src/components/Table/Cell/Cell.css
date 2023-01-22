@@ -1,15 +1,15 @@
 .cell-container {
-  width: 10em;
+  width: 15em;
   height: 2em;
 }
 .cell-container-focused {
-  width: 10em;
+  width: 15em;
   height: 2em;
   border: 2px var(--focused-cell-border) dashed;
 }
 
 .cell-container-error {
-  width: 10em;
+  width: 15em;
   color: var(--font-error);
   background-color: var(--error-background-color);
   height: 2em;
@@ -21,7 +21,7 @@ input:focus {
 }
 
 .header-cell-container {
-  width: 10em;
+  width: 15em;
   text-align: center;
   pointer-events: none;
   background-color: var(--header-cell-background);
