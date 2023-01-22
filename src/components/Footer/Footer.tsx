@@ -20,7 +20,7 @@ export const Footer: React.FC<FooterProps> = ({
         {t("footer.current-cell")}: {currentCell ? currentCell : "-"}
       </div>
       <div className="current-cell-text">
-        {t("footer.current-cell-sentence")}:
+        {t("footer.current-cell-sentence")}:{" "}
         {currentCellSentence ? currentCellSentence : "-"}
       </div>
       <div
@@ -30,8 +30,8 @@ export const Footer: React.FC<FooterProps> = ({
             : "current-cell-text"
         }
       >
-        {t("footer.current-cell-value")}:
-        {currentCellValue ? currentCellValue : "-"}
+        {t("footer.current-cell-value")}: {" "} {currentCellValue ? currentCellValue : "-"}
+        
       </div>
     </div>
   );
