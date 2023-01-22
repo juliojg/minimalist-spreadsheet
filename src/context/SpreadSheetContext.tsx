@@ -1,11 +1,12 @@
 import React, { useReducer } from "react";
-import { CellRef } from "../types/spreadSheetTypes";
+import { genList, zip } from "../utils/utils";
 
 export type SpreadSheetStateType = {
   maxRows: number;
   maxColumns: number;
-  table: string[][];
-  currentCell: CellRef | null;
+  byId: { [cellId: string]: string };
+  allIds: string[];
+  currentCell: string | null;
 };
 
 type Props = {
@@ -18,7 +19,8 @@ export const SpreadSheetContextProvider: React.FC<Props> = (props) => {
   const initialState: SpreadSheetStateType = {
     maxRows: 6,
     maxColumns: 6,
-    table: [],
+    byId: {},
+    allIds: [],
     currentCell: null
   };
   function reducer(
@@ -29,22 +31,33 @@ export const SpreadSheetContextProvider: React.FC<Props> = (props) => {
       case "initializeTable":
         return {
           ...state,
-          table: [...Array(action.payload.maxRows)].map(() =>
-            [...Array(action.payload.maxColumns)].map(() => "")
-          )
+          byId: zip(
+            genList(action.payload.maxColumns).map(x => String.fromCharCode(65 + x - 1)),
+            genList(action.payload.maxRows)
+          ).reduce(
+            (acc, current) => ({
+              ...acc,
+              [current[0].toString() + current[1].toString()]: ""
+            }),
+            {}
+          ),
+          allIds: zip(
+            genList(action.payload.maxColumns).map(x => String.fromCharCode(65 + x - 1)),
+            genList(action.payload.maxRows)
+          ).map(x => x[0].toString() + x[1].toString())
         };
       case "updateCell":
-        let updatedTable = [...state.table];
-        updatedTable[action.payload.positionY][action.payload.positionX] =
-          action.payload.inputValue;
         return {
           ...state,
-          table: updatedTable
+          byId: {
+            ...state.byId,
+            [action.payload.cellId]: action.payload.inputValue
+          }
         };
       case "setCurrentCell":
         return {
           ...state,
-          currentCell: action.payload.currentCell
+          currentCell: action.payload.cellId
         };
       default:
         throw new Error();

@@ -2,10 +2,10 @@ import { Sentence } from "../types/spreadSheetTypes";
 import { parseSentence } from "../utils/parser";
 import { useGetTable } from "./useGetTable";
 
-export const useEvalSentence = (positionY: string, positionX: string) => {
-  const table = useGetTable();
+export const useEvalSentence = (cellId: string) => {
+  const [, byId] = useGetTable();
 
-  const inputSentence = table[positionY][positionX];
+  const inputSentence = byId[cellId];
   const parsedSentence = parseSentence(inputSentence);
 
   const evalSentence: (sentence: Sentence) => string = (sentence: Sentence) => {
@@ -24,7 +24,7 @@ export const useEvalSentence = (positionY: string, positionX: string) => {
     if (sentence.operator === "SUM") {
       return sentence.operands.reduce(
         (acc, current) => {
-          return acc + Number(evalSentence(parseSentence(table[current.positionY][current.positionX])))
+          return acc + Number(evalSentence(parseSentence(byId[current.positionX + current.positionY])))
         },
         0
       ).toString();
@@ -32,7 +32,7 @@ export const useEvalSentence = (positionY: string, positionX: string) => {
     if (sentence.operator === "SUB") {
       return sentence.operands.reduce(
         (acc, current) =>
-          acc - Number(evalSentence(parseSentence(table[current.positionY][current.positionX]))),
+          acc - Number(evalSentence(parseSentence(byId[current.positionX + current.positionY]))),
         0
       ).toString();
     } else return "toEval";

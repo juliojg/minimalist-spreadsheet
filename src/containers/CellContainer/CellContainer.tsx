@@ -8,23 +8,24 @@ import { useGetTable } from "../../hooks/useGetTable";
 type CellContainerProps = {
   positionX: string;
   positionY: string;
+  cellId: string;
 };
 
 export const CellContainer: React.FC<CellContainerProps> = ({
   positionX,
-  positionY
+  positionY,
+  cellId
 }) => {
   const [, dispatch] = useContext(SpreadSheetContext);
-  const evaluatedSentence = useEvalSentence(positionY, positionX);
-  const table = useGetTable();
+  const evaluatedSentence = useEvalSentence(cellId);
+  const [, byId] = useGetTable();
   const currentCell = useGetCurrentCell();
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     dispatch({
       type: "updateCell",
       payload: {
-        positionX: positionX,
-        positionY: positionY,
+        cellId: cellId,
         inputValue: e.currentTarget.value
       }
     });
@@ -34,7 +35,7 @@ export const CellContainer: React.FC<CellContainerProps> = ({
     dispatch({
       type: "setCurrentCell",
       payload: {
-        currentCell: { positionX: positionX, positionY: positionY }
+        cellId: cellId
       }
     });
   };
@@ -43,12 +44,9 @@ export const CellContainer: React.FC<CellContainerProps> = ({
     <Cell
       onChange={handleOnChange}
       onClick={handleOnClick}
-      currentSentence={table[positionY][positionX]}
+      currentSentence={byId[cellId]}
       currentValue={evaluatedSentence}
-      focused={
-        currentCell?.positionX === positionX &&
-        currentCell?.positionY === positionY
-      }
+      focused={currentCell === cellId}
     />
   );
 };

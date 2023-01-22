@@ -1,16 +1,19 @@
+import { genList } from "../../utils/utils";
 import { Row } from "./Row/Row";
 import "./Table.css";
 
 type TableProps = {
-  content: string[][];
+  maxRows: number,
+  maxColumns: number,
 };
 
-export const Table: React.FC<TableProps> = ({ content }) => {
+export const Table: React.FC<TableProps> = ({ maxRows, maxColumns }) => {
+  
   return (
     <div className={"table-container"}>
       <div className={"content-container"}>
-        {content.map((row, index) => (
-          <Row key={index} content={row} positionY={index.toString()} />
+        {genList(maxRows).map((_, index) => (
+          <Row key={index} maxColumns={maxColumns} positionY={index.toString()} />
         ))}
       </div>
     </div>

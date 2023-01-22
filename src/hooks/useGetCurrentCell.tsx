@@ -1,11 +1,10 @@
 import { useContext, useMemo } from "react";
 import { SpreadSheetContext } from "../context/SpreadSheetContext";
-import { CellRef } from "../types/spreadSheetTypes";
 
 export const useGetCurrentCell = () => {
   const [state] = useContext(SpreadSheetContext);
 
-  const currentCell: CellRef = useMemo(
+  const currentCell: string = useMemo(
     () => state.currentCell,
     [
       state.currentCell,

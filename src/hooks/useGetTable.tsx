@@ -3,7 +3,8 @@ import { SpreadSheetContext } from "../context/SpreadSheetContext";
 
 export const useGetTable = () => {
   const [state] = useContext(SpreadSheetContext);
-  const table = useMemo(() => state.table, [state]);
+  const allIds = useMemo(() => state.allIds, [state]);
+  const byId = useMemo(() => state.byId, [state]);
 
-  return table;
+  return [allIds, byId];
 }
