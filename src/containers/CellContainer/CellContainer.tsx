@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { Cell } from "../../components/Table/Cell/Cell";
 import { SpreadSheetContext } from "../../context/SpreadSheetContext";
 import { useGetCurrentCell } from "../../hooks/useGetCurrentCell";
-import { useEvalSentence } from "../../hooks/useEvalSentence";
 import { useGetTable } from "../../hooks/useGetTable";
+import { useEvalCell } from "../../hooks/useEvalCell";
 
 type CellContainerProps = {
   positionX: string;
@@ -17,7 +17,7 @@ export const CellContainer: React.FC<CellContainerProps> = ({
   cellId
 }) => {
   const [, dispatch] = useContext(SpreadSheetContext);
-  const evaluatedSentence = useEvalSentence(cellId);
+  const evaluatedCell = useEvalCell(cellId);
   const [, byId] = useGetTable();
   const currentCell = useGetCurrentCell();
 
@@ -45,7 +45,7 @@ export const CellContainer: React.FC<CellContainerProps> = ({
       onChange={handleOnChange}
       onClick={handleOnClick}
       currentSentence={byId[cellId]}
-      currentValue={evaluatedSentence}
+      currentValue={evaluatedCell}
       focused={currentCell === cellId}
     />
   );

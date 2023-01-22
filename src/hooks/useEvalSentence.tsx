@@ -1,42 +1,52 @@
-import { Sentence } from "../types/spreadSheetTypes";
-import { parseSentence } from "../utils/parser";
-import { useGetTable } from "./useGetTable";
+import { evaluate } from "mathjs";
+// import { useGetTable } from "./useGetTable";
 
-export const useEvalSentence = (cellId: string) => {
-  const [, byId] = useGetTable();
+export const useEvalSentence = () => (sentence: string, byId: {[cellId: string]: string}) => {
+  // const [, byId] = useGetTable();
 
-  const inputSentence = byId[cellId];
-  const parsedSentence = parseSentence(inputSentence);
-
-  const evalSentence: (sentence: Sentence) => string = (sentence: Sentence) => {
-
-    if (sentence === undefined) {
-      return '2';
+  const evalSentence = (expression: string, notAllowedCellsIds: string[] = []
+  ) => {
+    
+    const filterFoundCells = notAllowedCellsIds.filter((cellId) =>
+    expression.includes(cellId)
+    );
+    
+    if (filterFoundCells.length) {
+      return "!ERROR";
     }
-    if (sentence.error.hasError) {
-      return sentence.error.errorMessage!;
-    }
-    if (sentence.operator === "NUMBER") {
-      if (sentence.value) {
-        return sentence.value;
-      }
-    }
-    if (sentence.operator === "SUM") {
-      return sentence.operands.reduce(
-        (acc, current) => {
-          return acc + Number(evalSentence(parseSentence(byId[current.positionX + current.positionY])))
-        },
-        0
-      ).toString();
-    }
-    if (sentence.operator === "SUB") {
-      return sentence.operands.reduce(
-        (acc, current) =>
-          acc - Number(evalSentence(parseSentence(byId[current.positionX + current.positionY]))),
-        0
-      ).toString();
-    } else return "toEval";
-  }
+    const cellValues = [
+      ...Array.from(expression?.matchAll(/[A-Z]+[0-9]+/gi) ?? [])
+    ]
+      .map((regrexOutput: any) => regrexOutput[0])
+      .map((cellId: string) => {
+        let value = "";
 
-  return evalSentence(parsedSentence);
-}
+        try {
+          value = byId[cellId] || "0";
+
+          if (value.startsWith("=")) {
+            notAllowedCellsIds.push(cellId);
+            value = evalSentence(value.slice(1), notAllowedCellsIds);
+          }
+        } catch { }
+        
+        return {
+          cellId,
+          value
+        };
+      });
+      
+      const evaluatedExpression = cellValues.reduce(
+        (finalExpression, cellValue) =>
+        finalExpression.replaceAll(
+          cellValue.cellId,
+          cellValue.value
+          ),
+          expression
+          );
+          
+    return `(${evaluatedExpression})`;
+  };
+
+  return evalSentence(sentence);
+};
