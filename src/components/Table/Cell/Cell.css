@@ -1,8 +1,10 @@
 .cell-container {
-  width: 15em;
+  width: 10em;
+  height: 2em;
 }
 .cell-container-focused {
-  width: 15em;
+  width: 10em;
+  height: 2em;
   border: 2px blue dashed;
 }
 
@@ -12,13 +14,15 @@ input:focus {
 }
 
 .header-cell-container {
-  width: 15em;
+  width: 10em;
+  text-align: center;
   pointer-events: none;
   background-color: rgb(212, 207, 207);
 }
 
 .header-left-cell-container {
   width: 3em;
+  text-align: center;
   pointer-events: none;
   background-color: rgb(212, 207, 207);
 }

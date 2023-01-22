@@ -17,8 +17,8 @@ export const SpreadSheetContext = React.createContext([] as any);
 
 export const SpreadSheetContextProvider: React.FC<Props> = (props) => {
   const initialState: SpreadSheetStateType = {
-    maxRows: 6,
-    maxColumns: 6,
+    maxRows: 25,
+    maxColumns: 10,
     byId: {},
     allIds: [],
     currentCell: null

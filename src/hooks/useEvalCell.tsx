@@ -1,10 +1,9 @@
 import { evaluate } from "mathjs";
-import { useEvalSentence } from "./useEvalSentence";
+import { evalSentence } from "../utils/utils";
 import { useGetTable } from "./useGetTable";
 
 export const useEvalCell = (cellId: string) => {
   const [, byId] = useGetTable();
-  const evalSentence = useEvalSentence();
 
   const value = byId[cellId];
   if (!value) {
@@ -14,9 +13,8 @@ export const useEvalCell = (cellId: string) => {
   if (value.startsWith("=")) {
     try {
       const evalutedExpression = evalSentence(value, byId);
-      if (evalutedExpression.includes("!ERROR")) {
-        console.log(value);
-        return "!ERROR";
+      if (evalutedExpression.includes("ERROR: Depends from own/recursive cell")) {
+        return '!ERROR: Redundant cell';
       }
       return evaluate(evalutedExpression.replace('=', ''));
     } catch {
