@@ -10,5 +10,6 @@
     "current-cell": "Current cell",
     "current-cell-sentence": "Sentence",
     "current-cell-value": "Evaluated sentence"
-  }
+  },
+  "instructions": "Valid cell values: numbers (e.g. 12, 77), '=' followed by cell ids (e.g. =A1, =C7), '=' followed by cell ids and operations (e.g. =A1+C4, =B2-A1)"
 }
