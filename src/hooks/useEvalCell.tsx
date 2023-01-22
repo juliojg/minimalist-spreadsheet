@@ -7,7 +7,7 @@ export const useEvalCell = (cellId: string) => {
 
   const value = byId[cellId];
   if (!value) {
-    return '0'
+    return ''
   }
 
   if (value.startsWith("=")) {

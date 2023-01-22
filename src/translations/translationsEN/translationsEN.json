@@ -5,5 +5,10 @@
   "titles": {
     "spreadsheet": "Minimalist spreadsheet",
     "instructions": "Instructions..."
+  },
+  "footer": {
+    "current-cell": "Current cell",
+    "current-cell-sentence": "Sentence"
+
   }
 }

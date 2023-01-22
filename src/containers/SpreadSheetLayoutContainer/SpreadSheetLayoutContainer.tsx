@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { SpreadSheetContext } from "../../context/SpreadSheetContext";
-import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
 import { SpreadSheetMain } from "../../components/SpreadSheetMain/SpreadSheetMain";
+import { FooterContainer } from "../FooterContainer/FooterContainer";
 
 export const SpreadSheetLayoutContainer: React.FC<{}> = () => {
   const [state, dispatch] = useContext(SpreadSheetContext);
@@ -18,7 +18,7 @@ export const SpreadSheetLayoutContainer: React.FC<{}> = () => {
     <div className="main no-select">
       <Header />
       <SpreadSheetMain />
-      <Footer />
+      <FooterContainer />
     </div>
   );
 };
