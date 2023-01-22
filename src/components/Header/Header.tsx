@@ -6,7 +6,7 @@ export const Header: React.FC<{}> = () => {
   const { t } = useTranslation();
   return (
     <div className="header-container">
-      <span> {t("titles.spreadsheet")} </span>
+      <span className="header-title"> {t("titles.spreadsheet")} </span>
     </div>
   );
 };

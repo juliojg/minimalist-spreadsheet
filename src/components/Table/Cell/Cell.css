@@ -17,12 +17,12 @@ input:focus {
   width: 10em;
   text-align: center;
   pointer-events: none;
-  background-color: rgb(212, 207, 207);
+  background-color: rgb(139, 193, 194);
 }
 
 .header-left-cell-container {
   width: 3em;
   text-align: center;
   pointer-events: none;
-  background-color: rgb(212, 207, 207);
+  background-color: rgb(139, 193, 194);
 }

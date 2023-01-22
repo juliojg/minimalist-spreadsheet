@@ -1,5 +1,5 @@
 .footer-container {
-  background-color: var(--mini-spinner-color);
+  background-color: var(--home-button-color);
   text-align: center;
   display: flex;
   height: 10vh;
