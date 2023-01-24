@@ -26,7 +26,7 @@ export const CellContainer: React.FC<CellContainerProps> = ({ cellId }) => {
     dispatch(
       updateCell({
         cellId: cellId,
-        inputValue: e.currentTarget.value
+        inputValue: e.currentTarget.value.toUpperCase()
       })
     );
 
