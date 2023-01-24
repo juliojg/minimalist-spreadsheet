@@ -1,17 +1,21 @@
 import { Footer } from "../../components/Footer/Footer";
-import { useEvalCell } from "../../hooks/useEvalCell";
-import { useGetCurrentCell } from "../../hooks/useGetCurrentCell";
-import { useGetTable } from "../../hooks/useGetTable";
+import {
+  selectCellById,
+  selectCurrentCell,
+  selectEvaluatedCell
+} from "../../store/selectors";
+import { useSelector } from "react-redux";
 
 export const FooterContainer: React.FC = () => {
-  const currentCell = useGetCurrentCell();
-  const [, byId] = useGetTable();
-  const evaluatedCell = useEvalCell(currentCell);
+  const currentCell = useSelector(selectCurrentCell);
+  const currentCellValue = useSelector(selectCellById(currentCell));
+
+  const evaluatedCell = useSelector(selectEvaluatedCell(currentCell ?? ""));
 
   return (
     <Footer
-      currentCell={currentCell}
-      currentCellSentence={byId[currentCell]}
+      currentCell={currentCell ?? "-"}
+      currentCellSentence={currentCellValue}
       currentCellValue={evaluatedCell.toString()}
     />
   );

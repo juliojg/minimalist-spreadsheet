@@ -1,21 +1,28 @@
+import { useMemo } from "react";
 import { genList } from "../../utils/utils";
 import { Row } from "./Row/Row";
 import "./Table.css";
 
 type TableProps = {
-  maxRows: number,
-  maxColumns: number,
+  maxRows: number;
+  maxColumns: number;
 };
 
 export const Table: React.FC<TableProps> = ({ maxRows, maxColumns }) => {
-  
-  return (
-    <div className={"table-container"}>
-      <div className={"content-container"}>
-        {genList(maxRows).map((_, index) => (
-          <Row key={index} maxColumns={maxColumns} positionY={index.toString()} />
-        ))}
+  return useMemo(
+    () => (
+      <div className={"table-container"}>
+        <div className={"content-container"}>
+          {genList(maxRows).map((_, index) => (
+            <Row
+              key={index}
+              maxColumns={maxColumns}
+              positionY={index.toString()}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    ),
+    [maxColumns, maxRows]
   );
 };

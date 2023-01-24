@@ -1,43 +1,37 @@
-import { useCallback, useContext } from "react";
 import { Cell } from "../../components/Table/Cell/Cell";
-import { SpreadSheetContext } from "../../context/SpreadSheetContext";
-import { useGetCurrentCell } from "../../hooks/useGetCurrentCell";
-import { useGetTable } from "../../hooks/useGetTable";
-import { useEvalCell } from "../../hooks/useEvalCell";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectCellById,
+  selectEvaluatedCell
+} from "../../store/selectors";
+import { setCurrentCell, updateCell } from "../../store/slices";
+import { useState } from "react";
 
 type CellContainerProps = {
   cellId: string;
 };
 
-export const CellContainer: React.FC<CellContainerProps> = ({
-  cellId
-}) => {
-  const [, dispatch] = useContext(SpreadSheetContext);
-  const evaluatedCell = useEvalCell(cellId);
+export const CellContainer: React.FC<CellContainerProps> = ({ cellId }) => {
+  const dispatch = useDispatch();
 
-  const [, byId] = useGetTable();
-  const currentCell = useGetCurrentCell();
+  const currentSentence = useSelector(selectCellById(cellId));
+  const evaluatedCell = useSelector(selectEvaluatedCell(cellId));
 
-  const currentSentence = byId[cellId];
+  const [isEditMode, setIsEditMode] = useState(false);
 
-  const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
-    dispatch({
-      type: "updateCell",
-      payload: {
+  const toggleToInput = () => setIsEditMode(true);
+  const toggleToSentence = () => setIsEditMode(false);
+
+  const handleOnChange = (e: React.FormEvent<HTMLInputElement>) =>
+    dispatch(
+      updateCell({
         cellId: cellId,
         inputValue: e.currentTarget.value
-      }
-    });
-  };
+      })
+    );
 
-  const handleOnClick: React.MouseEventHandler<HTMLInputElement> = useCallback(() => {
-    dispatch({
-      type: "setCurrentCell",
-      payload: {
-        cellId: cellId
-      }
-    });
-  }, [cellId, dispatch]);
+  const handleOnClick: React.MouseEventHandler<HTMLInputElement> = () =>
+    dispatch(setCurrentCell(cellId));
 
   return (
     <Cell
@@ -45,7 +39,9 @@ export const CellContainer: React.FC<CellContainerProps> = ({
       onClick={handleOnClick}
       currentSentence={currentSentence}
       currentValue={evaluatedCell}
-      focused={currentCell === cellId}
+      isEditMode={isEditMode}
+      toggleToInput={toggleToInput}
+      toggleToSentence={toggleToSentence}
     />
   );
 };
