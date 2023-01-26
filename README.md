@@ -1,7 +1,7 @@
 # Minimalist spreadsheet
 
 ## Dependencies
-To install the project `npm` is needed, run the following command at the project root to install all dependencies:
+To install the project `npm` is needed, run the following command at the project's to install all dependencies:
 ```
 npm install
 ```
@@ -15,7 +15,7 @@ npm start
 
 ## Linter
 
-ESLint was used as static-code-analysis tool, a revision can be executed runnig the followig command:
+ESLint was used as static-code-analysis tool, a revision can be executed running the followig command:
 ``` npx eslint src/```
 
 ## Configuration
@@ -25,7 +25,7 @@ The project was built with `create-react-app`, using webpack.
 
 ## Modules
 
-In the `/src/` folder we can find the following directories:
+In the `/src/` folder, we can find the following directories:
 
 - components (generic components used around all the app, they represent the visual and UI aspects of the app)
 - containers (components that are aware of the state of the app, and know how to handle it. They tend to use the generic components, providing them with props)
@@ -38,9 +38,9 @@ In the `/src/` folder we can find the following directories:
 
 
 ## Redux / Store
-The state of the app is handled by Redux as state-management-tool.
+The state of the app is handled by Redux as state management tool.
 
-## Dependencias utilizadas
+## Used dependencies:
 ### i18next
 
 Library to handle translations and localization.
@@ -50,4 +50,4 @@ Library to retrieve the language of the browser.
 ### reduxjs/toolkit
 
 ### mathjs
-Library that provides a safe evaluator for senteces.
+Library that provides a safe evaluator for sentences.
